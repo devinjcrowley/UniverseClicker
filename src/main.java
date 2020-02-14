@@ -15,11 +15,15 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import javafx.scene.layout.Pane;
 
 public class main extends Application {
 
     private int coins = 0;
     private Text score = new Text("Cosmo Coins: 0");
+    private int levelLimit = 10;
+    private int level = 1;
+    final Color PRIMARYGRAY = Color.valueOf("#575757");
 
     // Instantiation of Start Method
     @Override
@@ -78,18 +82,47 @@ public class main extends Application {
         }
 
         RowConstraints rowConst = new RowConstraints();
-        rowConst.setPercentHeight(25);
+        rowConst.setPercentHeight(150);
         progressBar.getRowConstraints().add(rowConst);
 
         progressBarTitle.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
-        progressBar.setBackground(new Background(new BackgroundFill(Color.DARKBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
+        progressBar.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
         nextLevelPane.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
         coinPane.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
+        progressPane.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
 
         Text progressTitle = new Text();
-        progressTitle.setText("Progress Title: " + coins);
-        progressTitle.setFont(Font.font("Helvetica", 30));
+        progressTitle.setText(" Progress:  ");
+        progressTitle.setFont(Font.font("Helvetica", 25));
+        progressTitle.setStroke(Color.WHITE);
+        progressTitle.relocate(0, 50);
         progressBarTitle.getChildren().add(progressTitle);
+
+        Text nextLevel = new Text();
+        nextLevel.setText("  Next Level: " + (level+1) + " ");
+        nextLevel.setFont(Font.font("Helvetica", 25));
+        nextLevel.setStroke(Color.WHITE);
+        nextLevel.relocate(0, 50);
+        nextLevelPane.getChildren().add(nextLevel);
+
+        Rectangle sq1 = new Rectangle(50, 50, PRIMARYGRAY);
+        Rectangle sq2 = new Rectangle(50, 50, PRIMARYGRAY);
+        Rectangle sq3 = new Rectangle(50, 50, PRIMARYGRAY);
+        Rectangle sq4 = new Rectangle(50, 50, PRIMARYGRAY);
+
+
+        Rectangle[] progressSquares = {sq1, sq2, sq3, sq4};
+
+        for (int i=0; i<progressSquares.length; i++) {
+            progressBar.add(progressSquares[i], i, 0);
+        }
+
+
+
+        progressBarTitle.setMinHeight(150);
+        progressBarTitle.setMinWidth(100);
+
+
 
         progressPane.add(progressBarTitle, 0, 0);
         progressPane.add(progressBar, 1, 0);
@@ -123,7 +156,10 @@ public class main extends Application {
         // Click Controls
         Timeline animation;
         animation = new Timeline(
-                new KeyFrame(Duration.millis(100), e -> updateCookies(coinPane))
+                new KeyFrame(Duration.millis(100), e -> {
+                    updateCookies(coinPane);
+                    changeLevel(nextLevelPane, nextLevel, progressSquares);
+                })
         );
 
         animation.setCycleCount(Timeline.INDEFINITE);
@@ -150,11 +186,46 @@ public class main extends Application {
 
     public void displayCoins(Pane coinPane) {
         coinPane.getChildren().remove(score);
-        score.setText("Cosmo Coins: " + coins);
-        score.setFont(Font.font("Helvetica", 30));
+        score.setText("  Cosmo Coins: " + coins + "  ");
+        score.setFont(Font.font("Helvetica", 25));
         score.setStroke(Color.WHITE);
-        score.relocate(0, 0);
+        score.relocate(0, 50);
         coinPane.getChildren().add(score);
+    }
+
+    public void changeLevel(Pane nextLevelPane, Text nextLevel, Rectangle[] progressSquares) {
+        if (coins >= levelLimit) {
+            nextLevelPane.getChildren().remove(nextLevel);
+            level++;
+            nextLevel.setText("  Next Level: " + (level + 1) + "  ");
+
+            if (level == 1) {
+                levelLimit = 10;
+            } else if (level == 2) {
+                levelLimit = 100;
+            } else if (level == 3) {
+                levelLimit = 1000;
+            } else if (level == 4) {
+                levelLimit = 10000;
+            } else if (level == 5) {
+                levelLimit = 100000;
+            }
+
+            for (Rectangle r : progressSquares) {
+                r.setFill(PRIMARYGRAY);
+            }
+
+            nextLevelPane.getChildren().add(nextLevel);
+        } if ((levelLimit / 4.00) * 3 <= coins) {
+            progressSquares[0].setFill(Color.PURPLE);
+            progressSquares[1].setFill(Color.PURPLE);
+            progressSquares[2].setFill(Color.PURPLE);
+        } else if ((levelLimit / 4.00) * 2 <= coins) {
+            progressSquares[0].setFill(Color.PURPLE);
+            progressSquares[1].setFill(Color.PURPLE);
+        } else if ((levelLimit / 4.00) <= coins) {
+            progressSquares[0].setFill(Color.PURPLE);
+        }
     }
 }
 
