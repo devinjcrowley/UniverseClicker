@@ -215,6 +215,8 @@ public class main extends Application {
         satellite.add(satName, 1, 0);
 
         // red giant stuff
+        redStar.getRowConstraints().add(new RowConstraints(100));
+        redStar.getRowConstraints().add(new RowConstraints(60));
         redStar.getColumnConstraints().add(new ColumnConstraints(150));
         redStar.getColumnConstraints().add(new ColumnConstraints(250));
         Image redPic = new Image("red.png");
@@ -226,8 +228,14 @@ public class main extends Application {
         Text redName = new Text("Red Star");
         redName.setFont(Font.font("Helvetica", 25));
         redName.setStroke(Color.WHITE);
+        Text redCount = new Text("     x" + redNum);
+        redCount.setFont(Font.font("Helvetica", 25));
+        redCount.setStroke(Color.WHITE);
+        redStar.add(redCount, 0, 1);
         redStar.add(redName, 1, 0);
 
+        blackHole.getRowConstraints().add(new RowConstraints(100));
+        blackHole.getRowConstraints().add(new RowConstraints(60));
         blackHole.getColumnConstraints().add(new ColumnConstraints(150));
         blackHole.getColumnConstraints().add(new ColumnConstraints(250));
         Image blackPic = new Image("black.png");
@@ -239,6 +247,10 @@ public class main extends Application {
         Text blackName = new Text("Black Hole");
         blackName.setFont(Font.font("Helvetica", 25));
         blackName.setStroke(Color.WHITE);
+        Text blackCount = new Text("     x" + blackNum);
+        blackCount.setFont(Font.font("Helvetica", 25));
+        blackCount.setStroke(Color.WHITE);
+        blackHole.add(blackCount, 0, 1);
         blackHole.add(blackName, 1, 0);
 
         satellite.getColumnConstraints().add(new ColumnConstraints(150));
