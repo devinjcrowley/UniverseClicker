@@ -143,12 +143,59 @@ public class main extends Application {
 
 
         // Shops Area
+        storeShopsPane.setVgap(5);
+        storeShopsPane.getRowConstraints().add(new RowConstraints(160));
+        storeShopsPane.getRowConstraints().add(new RowConstraints(160));
+        storeShopsPane.getRowConstraints().add(new RowConstraints(160));
+        storeShopsPane.getRowConstraints().add(new RowConstraints(160));
+        GridPane shootingStar = new GridPane();
+        shootingStar.setStyle("-fx-padding: 2;" +
+                "-fx-border-style: solid inside;" +
+                "-fx-border-width: 2;" +
+                "-fx-border-insets: 5;" +
+                "-fx-border-radius: 5;" +
+                "-fx-border-color: white;");
+        shootingStar.setBackground(new Background(new BackgroundFill(Color.BLACK,
+                CornerRadii.EMPTY, Insets.EMPTY)));
+        GridPane satellite = new GridPane();
+        satellite.setStyle("-fx-padding: 2;" +
+                "-fx-border-style: solid inside;" +
+                "-fx-border-width: 2;" +
+                "-fx-border-insets: 5;" +
+                "-fx-border-radius: 5;" +
+                "-fx-border-color: white;");
+        satellite.setBackground(new Background(new BackgroundFill(Color.BLACK,
+                CornerRadii.EMPTY, Insets.EMPTY)));
+        GridPane redStar = new GridPane();
+        redStar.setStyle("-fx-padding: 2;" +
+                "-fx-border-style: solid inside;" +
+                "-fx-border-width: 2;" +
+                "-fx-border-insets: 5;" +
+                "-fx-border-radius: 5;" +
+                "-fx-border-color: white;");
+        redStar.setBackground(new Background(new BackgroundFill(Color.BLACK,
+                CornerRadii.EMPTY, Insets.EMPTY)));
+        GridPane blackHole = new GridPane();
+        blackHole.setStyle("-fx-padding: 2;" +
+                "-fx-border-style: solid inside;" +
+                "-fx-border-width: 2;" +
+                "-fx-border-insets: 5;" +
+                "-fx-border-radius: 5;" +
+                "-fx-border-color: white;");
+        blackHole.setBackground(new Background(new BackgroundFill(Color.BLACK,
+                CornerRadii.EMPTY, Insets.EMPTY)));
 
+        storeShopsPane.add(shootingStar, 0, 0);
+        storeShopsPane.add(satellite, 0, 1);
+        storeShopsPane.add(redStar, 0, 2);
+        storeShopsPane.add(blackHole, 0, 3);
+        storeShopsPane.setBackground((new Background(new BackgroundFill(Color.BLACK,
+                CornerRadii.EMPTY, Insets.EMPTY))));
 
 
 
         // Grid Area
-
+        gridOrganizer.add(storeShopsPane, 1, 1);
         gridOrganizer.add(storeNamePane, 1, 0);
         gridOrganizer.add(clickerPane,0,1);
         gridOrganizer.add(progressPane, 0,0 );
