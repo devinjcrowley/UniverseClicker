@@ -19,6 +19,7 @@ import javafx.util.Duration;
 public class main extends Application {
 
     private int coins = 0;
+    private Text score = new Text("Cosmo Coins: 0");
 
     // Instantiation of Start Method
     @Override
@@ -63,11 +64,38 @@ public class main extends Application {
 
         //TODO:
 
+        Pane progressBarTitle = new Pane();
         GridPane progressBar = new GridPane();
-        progressBar.getColumnConstraints().add(new ColumnConstraints(50));
-        progressPane.add(progressBar, 0, 0);
+        Pane nextLevelPane = new Pane();
+        Pane coinPane = new Pane();
 
+        progressBar.setHgap(30);
 
+        for (int i=0; i<4; i++) {
+            ColumnConstraints colConst = new ColumnConstraints();
+            colConst.setPercentWidth(100.0 / 4);
+            progressBar.getColumnConstraints().add(colConst);
+        }
+
+        RowConstraints rowConst = new RowConstraints();
+        rowConst.setPercentHeight(25);
+        progressBar.getRowConstraints().add(rowConst);
+
+        progressBarTitle.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
+        progressBar.setBackground(new Background(new BackgroundFill(Color.DARKBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
+        nextLevelPane.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
+        coinPane.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
+
+        Text progressTitle = new Text();
+        progressTitle.setText("Progress Title: " + coins);
+        progressTitle.setFont(Font.font("Helvetica", 30));
+        progressBarTitle.getChildren().add(progressTitle);
+
+        progressPane.add(progressBarTitle, 0, 0);
+        progressPane.add(progressBar, 1, 0);
+        progressPane.add(nextLevelPane, 2, 0);
+        progressPane.add(coinPane, 3, 0);
+        displayCoins(coinPane);
 
 
         // Store Name Area
@@ -95,7 +123,7 @@ public class main extends Application {
         // Click Controls
         Timeline animation;
         animation = new Timeline(
-                new KeyFrame(Duration.millis(100), e -> updateCookies())
+                new KeyFrame(Duration.millis(100), e -> updateCookies(coinPane))
         );
 
         animation.setCycleCount(Timeline.INDEFINITE);
@@ -103,6 +131,7 @@ public class main extends Application {
 
         earthView.setOnMouseClicked(e -> {
             coins = Earth.updateCoins(coins);
+            displayCoins(coinPane);
         });
 
         // Establishing setup of Window
@@ -115,8 +144,17 @@ public class main extends Application {
         gridOrganizer.requestFocus();
     }
 
-    public void updateCookies() {
+    public void updateCookies(Pane coinPane) {
+        displayCoins(coinPane);
+    }
 
+    public void displayCoins(Pane coinPane) {
+        coinPane.getChildren().remove(score);
+        score.setText("Cosmo Coins: " + coins);
+        score.setFont(Font.font("Helvetica", 30));
+        score.setStroke(Color.WHITE);
+        score.relocate(0, 0);
+        coinPane.getChildren().add(score);
     }
 }
 
