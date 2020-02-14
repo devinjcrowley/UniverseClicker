@@ -99,6 +99,10 @@ public class main extends Application {
         animation.setCycleCount(Timeline.INDEFINITE);
         animation.play();
 
+        earthView.setOnMouseClicked(e -> {
+            Earth.updateCookies();
+        });
+
         // Establishing setup of Window
         Scene scene = new Scene(gridOrganizer, 1200, 800);
         primaryStage.setTitle("Cosmos Clicker");
@@ -107,6 +111,10 @@ public class main extends Application {
 
         // Ensures Animations Update
         gridOrganizer.requestFocus();
+    }
+
+    public void updateCookies() {
+
     }
 }
 
