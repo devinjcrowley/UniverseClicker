@@ -24,6 +24,10 @@ public class main extends Application {
     private int levelLimit = 10;
     private int level = 1;
     final Color PRIMARYGRAY = Color.valueOf("#575757");
+    private int shootingNum =0;
+    private int satNum = 0;
+    private int redNum = 0;
+    private int blackNum = 0;
 
     // Instantiation of Start Method
     @Override
@@ -182,6 +186,7 @@ public class main extends Application {
         blackHole.setBackground(new Background(new BackgroundFill(Color.BLACK,
                 CornerRadii.EMPTY, Insets.EMPTY)));
 
+
         storeShopsPane.add(shootingStar, 0, 0);
         storeShopsPane.add(satellite, 0, 1);
         storeShopsPane.add(redStar, 0, 2);
@@ -200,9 +205,10 @@ public class main extends Application {
         // Click Controls
         Timeline animation;
         animation = new Timeline(
-                new KeyFrame(Duration.millis(100), e -> {
+                new KeyFrame(Duration.millis(1000), e -> {
                     updateCookies(coinPane);
                     changeLevel(nextLevelPane, nextLevel, progressSquares);
+                    coins += (satelliteUpdate() + shootingUpdate() + redUpdate() + blackUpdate());
                 })
         );
 
@@ -260,7 +266,8 @@ public class main extends Application {
             }
 
             nextLevelPane.getChildren().add(nextLevel);
-        } if ((levelLimit / 4.00) * 3 <= coins) {
+        }
+        if ((levelLimit / 4.00) * 3 <= coins) {
             progressSquares[0].setFill(Color.PURPLE);
             progressSquares[1].setFill(Color.PURPLE);
             progressSquares[2].setFill(Color.PURPLE);
@@ -270,6 +277,21 @@ public class main extends Application {
         } else if ((levelLimit / 4.00) <= coins) {
             progressSquares[0].setFill(Color.PURPLE);
         }
+    }
+    public int shootingUpdate(){
+        return shootingNum * 3;
+    }
+
+    public int satelliteUpdate(){
+        return satNum * 5;
+    }
+
+    public int redUpdate(){
+        return redNum * 15;
+    }
+
+    public int blackUpdate(){
+        return blackNum * 25;
     }
 }
 
