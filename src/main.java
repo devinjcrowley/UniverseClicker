@@ -40,6 +40,10 @@ public class main extends Application {
 
         //TODO:
 
+        Pane cosmicBackground = new Pane();
+        cosmicBackground.setBackground(new Background(new BackgroundFill(Color.DARKBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
+        clickerPane.getChildren().addAll(cosmicBackground);
+
 
         // Progress Area
 
@@ -57,12 +61,13 @@ public class main extends Application {
 
         // Shops Area
 
-        //TODO:
+
 
 
         // Grid Area
 
         gridOrganizer.add(storeNamePane, 1, 0);
+        gridOrganizer.add(clickerPane,0,1);
 
 
         // Establishing setup of Window
