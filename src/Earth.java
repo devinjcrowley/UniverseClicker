@@ -1,6 +1,6 @@
 public class Earth {
-    public static void updateCookies() {
-
+    public static int updateCoins(int coins) {
+        return ++coins;
     }
 
 
