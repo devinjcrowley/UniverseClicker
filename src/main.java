@@ -187,6 +187,8 @@ public class main extends Application {
                 CornerRadii.EMPTY, Insets.EMPTY)));
 
         //shooting star stuff
+        shootingStar.getRowConstraints().add(new RowConstraints(100));
+        shootingStar.getRowConstraints().add(new RowConstraints(60));
         shootingStar.getColumnConstraints().add(new ColumnConstraints(150));
         shootingStar.getColumnConstraints().add(new ColumnConstraints(250));
         Image shootingPic = new Image("star.png");
@@ -198,9 +200,19 @@ public class main extends Application {
         Text sName = new Text("Shooting Star");
         sName.setFont(Font.font("Helvetica", 25));
         sName.setStroke(Color.WHITE);
+        Text shootCount = new Text("     x" + shootingNum);
+        shootCount.setFont(Font.font("Helvetica", 25));
+        shootCount.setStroke(Color.WHITE);
+        shootingStar.add(shootCount, 0, 1);
+        Text shootDes = new Text("Produce 3 CosmoCoins per second \nfor 50 CosmoCoins!");
+        shootDes.setFont(Font.font("Helvetica", 15));
+        shootDes.setStroke(Color.WHITE);
+        shootingStar.add(shootDes, 1, 1);
         shootingStar.add(sName, 1, 0);
 
         //satellite stuff
+        satellite.getRowConstraints().add(new RowConstraints(100));
+        satellite.getRowConstraints().add(new RowConstraints(60));
         satellite.getColumnConstraints().add(new ColumnConstraints(150));
         satellite.getColumnConstraints().add(new ColumnConstraints(250));
         Image satPic = new Image("sat.png");
@@ -211,7 +223,15 @@ public class main extends Application {
         satellite.add(satView, 0, 0);
         Text satName = new Text("Satellite");
         satName.setFont(Font.font("Helvetica", 25));
+        Text satCount = new Text("     x" + satNum);
+        satCount.setFont(Font.font("Helvetica", 25));
+        satCount.setStroke(Color.WHITE);
+        satellite.add(satCount, 0, 1);
         satName.setStroke(Color.WHITE);
+        Text satDes = new Text("Produce 5 CosmoCoins per second \nfor 150 CosmoCoins!");
+        satDes.setFont(Font.font("Helvetica", 15));
+        satDes.setStroke(Color.WHITE);
+        satellite.add(satDes, 1, 1);
         satellite.add(satName, 1, 0);
 
         // red giant stuff
@@ -231,6 +251,10 @@ public class main extends Application {
         Text redCount = new Text("     x" + redNum);
         redCount.setFont(Font.font("Helvetica", 25));
         redCount.setStroke(Color.WHITE);
+        Text redDes = new Text("Produce 15 CosmoCoins per second \nfor 500 CosmoCoins!");
+        redDes.setFont(Font.font("Helvetica", 15));
+        redDes.setStroke(Color.WHITE);
+        redStar.add(redDes, 1, 1);
         redStar.add(redCount, 0, 1);
         redStar.add(redName, 1, 0);
 
@@ -250,6 +274,10 @@ public class main extends Application {
         Text blackCount = new Text("     x" + blackNum);
         blackCount.setFont(Font.font("Helvetica", 25));
         blackCount.setStroke(Color.WHITE);
+        Text blackDes = new Text("Produce 25 CosmoCoins per second \nfor 1000 Cosmo Coins!");
+        blackDes.setFont(Font.font("Helvetica", 15));
+        blackDes.setStroke(Color.WHITE);
+        blackHole.add(blackDes, 1, 1);
         blackHole.add(blackCount, 0, 1);
         blackHole.add(blackName, 1, 0);
 
@@ -294,6 +322,26 @@ public class main extends Application {
             coins = Earth.updateCoins(coins);
             displayCoins(coinPane);
             changeLevel(nextLevelPane, nextLevel, progressSquares);
+        });
+
+        blackView.setOnMouseClicked(e -> {
+            System.out.println("in black\n");
+            buyBlack(blackHole, blackCount);
+        });
+
+        satView.setOnMouseClicked(e -> {
+            System.out.println("in sat\n");
+            buySat(satellite, satCount);
+        });
+
+        redView.setOnMouseClicked(e -> {
+            System.out.println("in red\n");
+            buyRed(redStar, redCount);
+        });
+
+        shootingView.setOnMouseClicked(e -> {
+            System.out.println("in shoot\n");
+            buyRed(shootingStar, shootCount);
         });
 
         // Establishing setup of Window
@@ -368,6 +416,54 @@ public class main extends Application {
 
     public int blackUpdate(){
         return blackNum * 25;
+    }
+
+    public void buySat (GridPane satillite, Text satCount) {
+        if (coins >= 150) {
+            satillite.getChildren().remove(satCount);
+            satNum++;
+            coins -= 150;
+            satCount = new Text("     x" + satNum);
+            satCount.setFont(Font.font("Helvetica", 25));
+            satCount.setStroke(Color.WHITE);
+            satillite.add(satCount, 0, 1);
+        }
+    }
+
+    public void buyBlack (GridPane blackHole, Text blackCount) {
+        if (coins >= 1000) {
+            blackHole.getChildren().remove(blackCount);
+            blackNum++;
+            coins -= 1000;
+            blackCount = new Text("     x" + blackNum);
+            blackCount.setFont(Font.font("Helvetica", 25));
+            blackCount.setStroke(Color.WHITE);
+            blackHole.add(blackCount, 0, 1);
+        }
+    }
+
+    public void buyRed (GridPane redStar, Text redCount) {
+        if (coins >= 500) {
+            redStar.getChildren().remove(redCount);
+            redNum++;
+            coins -= 500;
+            redCount = new Text("     x" + redNum);
+            redCount.setFont(Font.font("Helvetica", 25));
+            redCount.setStroke(Color.WHITE);
+            redStar.add(redCount, 0, 1);
+        }
+    }
+
+    public void buyShoot (GridPane shootingStar, Text shootCount) {
+        if (coins >= 50) {
+            shootingStar.getChildren().remove(shootCount);
+            shootingNum++;
+            coins -= 50;
+            shootCount = new Text("     x" + shootingNum);
+            shootCount.setFont(Font.font("Helvetica", 25));
+            shootCount.setStroke(Color.WHITE);
+            shootingStar.add(shootCount, 0, 1);
+        }
     }
 }
 
