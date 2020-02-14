@@ -1,5 +1,5 @@
 public class Earth {
-    public void updateCookies() {
+    public static void updateCookies() {
 
     }
 }
