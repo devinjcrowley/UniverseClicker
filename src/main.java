@@ -18,6 +18,8 @@ import javafx.util.Duration;
 
 public class main extends Application {
 
+    private int coins = 0;
+
     // Instantiation of Start Method
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -100,7 +102,7 @@ public class main extends Application {
         animation.play();
 
         earthView.setOnMouseClicked(e -> {
-            Earth.updateCookies();
+            coins = Earth.updateCoins(coins);
         });
 
         // Establishing setup of Window
