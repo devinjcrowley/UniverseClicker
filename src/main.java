@@ -281,6 +281,7 @@ public class main extends Application {
         earthView.setOnMouseClicked(e -> {
             coins = Earth.updateCoins(coins);
             displayCoins(coinPane);
+            changeLevel(nextLevelPane, nextLevel, progressSquares);
         });
 
         // Establishing setup of Window
