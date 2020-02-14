@@ -228,6 +228,19 @@ public class main extends Application {
         redName.setStroke(Color.WHITE);
         redStar.add(redName, 1, 0);
 
+        blackHole.getColumnConstraints().add(new ColumnConstraints(150));
+        blackHole.getColumnConstraints().add(new ColumnConstraints(250));
+        Image blackPic = new Image("black.png");
+        ImageView blackView = new ImageView(blackPic);
+        blackView.setFitHeight(100);
+        blackView.setFitWidth(100);
+        blackView.relocate(0, 150);
+        blackHole.add(blackView, 0,0);
+        Text blackName = new Text("Black Hole");
+        blackName.setFont(Font.font("Helvetica", 25));
+        blackName.setStroke(Color.WHITE);
+        blackHole.add(blackName, 1, 0);
+
         satellite.getColumnConstraints().add(new ColumnConstraints(150));
         satellite.getColumnConstraints().add(new ColumnConstraints(250));
 
