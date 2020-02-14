@@ -5,6 +5,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -42,7 +43,10 @@ public class main extends Application {
 
         Pane cosmicBackground = new Pane();
         cosmicBackground.setBackground(new Background(new BackgroundFill(Color.DARKBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
-        clickerPane.getChildren().addAll(cosmicBackground);
+        Image earthPicture = new Image();
+
+        clickerPane.getChildren().addAll(cosmicBackground, earthPicture);
+
 
 
         // Progress Area
