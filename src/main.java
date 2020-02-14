@@ -186,6 +186,56 @@ public class main extends Application {
         blackHole.setBackground(new Background(new BackgroundFill(Color.BLACK,
                 CornerRadii.EMPTY, Insets.EMPTY)));
 
+        //shooting star stuff
+        shootingStar.getColumnConstraints().add(new ColumnConstraints(150));
+        shootingStar.getColumnConstraints().add(new ColumnConstraints(250));
+        Image shootingPic = new Image("star.png");
+        ImageView shootingView = new ImageView(shootingPic);
+        shootingView.setFitHeight(100);
+        shootingView.setFitWidth(100);
+        shootingView.relocate(0, 150);
+        shootingStar.add(shootingView, 0, 0);
+        Text sName = new Text("Shooting Star");
+        sName.setFont(Font.font("Helvetica", 25));
+        sName.setStroke(Color.WHITE);
+        shootingStar.add(sName, 1, 0);
+
+        //satellite stuff
+        satellite.getColumnConstraints().add(new ColumnConstraints(150));
+        satellite.getColumnConstraints().add(new ColumnConstraints(250));
+        Image satPic = new Image("sat.png");
+        ImageView satView = new ImageView(satPic);
+        satView.setFitHeight(100);
+        satView.setFitWidth(100);
+        satView.relocate(0, 150);
+        satellite.add(satView, 0, 0);
+        Text satName = new Text("Satellite");
+        satName.setFont(Font.font("Helvetica", 25));
+        satName.setStroke(Color.WHITE);
+        satellite.add(satName, 1, 0);
+
+        // red giant stuff
+        redStar.getColumnConstraints().add(new ColumnConstraints(150));
+        redStar.getColumnConstraints().add(new ColumnConstraints(250));
+        Image redPic = new Image("red.png");
+        ImageView redView = new ImageView(redPic);
+        redView.setFitHeight(100);
+        redView.setFitWidth(100);
+        redView.relocate(0, 150);
+        redStar.add(redView, 0, 0);
+        Text redName = new Text("Red Star");
+        redName.setFont(Font.font("Helvetica", 25));
+        redName.setStroke(Color.WHITE);
+        redStar.add(redName, 1, 0);
+
+        satellite.getColumnConstraints().add(new ColumnConstraints(150));
+        satellite.getColumnConstraints().add(new ColumnConstraints(250));
+
+        redStar.getColumnConstraints().add(new ColumnConstraints(150));
+        redStar.getColumnConstraints().add(new ColumnConstraints(250));
+
+        blackHole.getColumnConstraints().add(new ColumnConstraints(150));
+        blackHole.getColumnConstraints().add(new ColumnConstraints(250));
 
         storeShopsPane.add(shootingStar, 0, 0);
         storeShopsPane.add(satellite, 0, 1);
