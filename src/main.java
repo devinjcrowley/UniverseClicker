@@ -117,12 +117,8 @@ public class main extends Application {
             progressBar.add(progressSquares[i], i, 0);
         }
 
-
-
         progressBarTitle.setMinHeight(150);
         progressBarTitle.setMinWidth(100);
-
-
 
         progressPane.add(progressBarTitle, 0, 0);
         progressPane.add(progressBar, 1, 0);
@@ -148,6 +144,7 @@ public class main extends Application {
         storeShopsPane.getRowConstraints().add(new RowConstraints(160));
         storeShopsPane.getRowConstraints().add(new RowConstraints(160));
         storeShopsPane.getRowConstraints().add(new RowConstraints(160));
+        storeShopsPane.getColumnConstraints().add(new ColumnConstraints(400));
         GridPane shootingStar = new GridPane();
         shootingStar.setStyle("-fx-padding: 2;" +
                 "-fx-border-style: solid inside;" +
