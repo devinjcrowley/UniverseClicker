@@ -29,6 +29,11 @@ public class main extends Application {
     private int redNum = 0;
     private int blackNum = 0;
 
+    private boolean blackPlaced = false;
+    private boolean shootingPlaced = false;
+    private boolean redPlaced = false;
+    private boolean satPlaced = false;
+
     // Instantiation of Start Method
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -63,8 +68,11 @@ public class main extends Application {
         ImageView galaxyView = new ImageView(galaxy);
         galaxyView.setFitHeight(650);
         galaxyView.setFitWidth(800);
+        Pane displayImages = new Pane();
+        displayImages.setPrefHeight(800);
+        displayImages.setPrefWidth(400);
 
-        clickerPane.getChildren().addAll(galaxyView, earthView);
+        clickerPane.getChildren().addAll(galaxyView, displayImages, earthView);
 
 
 
@@ -135,7 +143,7 @@ public class main extends Application {
 
         Image storeTitle = new Image("title.png");
         ImageView storeTitleView = new ImageView(storeTitle);
-        storeTitleView.setFitHeight(350);
+        storeTitleView.setFitHeight(150);
         storeTitleView.setFitWidth(400);
         storeNamePane.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
         storeNamePane.getChildren().add(storeTitleView);
@@ -325,23 +333,56 @@ public class main extends Application {
         });
 
         blackView.setOnMouseClicked(e -> {
-            System.out.println("in black\n");
             buyBlack(blackHole, blackCount);
+            if (blackNum >= 1 && !blackPlaced) {
+                blackPlaced = true;
+                Image blackPicDisplay = new Image("black.png");
+                ImageView blackViewDisplay = new ImageView(blackPicDisplay);
+                displayImages.getChildren().add(blackViewDisplay);
+                blackViewDisplay.relocate(700, 100);
+                blackViewDisplay.setFitWidth(125);
+                blackViewDisplay.setFitHeight(125);
+                blackViewDisplay.relocate(50, 500);
+            }
         });
 
         satView.setOnMouseClicked(e -> {
-            System.out.println("in sat\n");
             buySat(satellite, satCount);
+            if (satNum >= 1 && !satPlaced) {
+                satPlaced = true;
+                Image satPicDisplay = new Image("sat.png");
+                ImageView satViewDisplay = new ImageView(satPicDisplay);
+                displayImages.getChildren().add(satViewDisplay);
+                satViewDisplay.setFitWidth(125);
+                satViewDisplay.setFitHeight(125);
+                satViewDisplay.relocate(50, 75);
+            }
         });
 
         redView.setOnMouseClicked(e -> {
-            System.out.println("in red\n");
             buyRed(redStar, redCount);
+            if (redNum >= 1 && !redPlaced) {
+                redPlaced = true;
+                Image redPicDisplay = new Image("red.png");
+                ImageView redViewDisplay = new ImageView(redPicDisplay);
+                displayImages.getChildren().add(redViewDisplay);
+                redViewDisplay.setFitWidth(125);
+                redViewDisplay.setFitHeight(125);
+                redViewDisplay.relocate(550, 500);
+            }
         });
 
         shootingView.setOnMouseClicked(e -> {
-            System.out.println("in shoot\n");
-            buyRed(shootingStar, shootCount);
+            buyShoot(shootingStar, shootCount);
+            if (shootingNum >= 1 && !shootingPlaced) {
+                shootingPlaced = true;
+                Image shootingPicDisplay = new Image("star.png");
+                ImageView shootingViewDisplay = new ImageView(shootingPicDisplay);
+                displayImages.getChildren().add(shootingViewDisplay);
+                shootingViewDisplay.setFitWidth(125);
+                shootingViewDisplay.setFitHeight(125);
+                shootingViewDisplay.relocate(550, 150);
+            }
         });
 
         // Establishing setup of Window
@@ -420,49 +461,41 @@ public class main extends Application {
 
     public void buySat (GridPane satillite, Text satCount) {
         if (coins >= 150) {
-            satillite.getChildren().remove(satCount);
             satNum++;
             coins -= 150;
-            satCount = new Text("     x" + satNum);
+            satCount.setText("     x" + satNum);
             satCount.setFont(Font.font("Helvetica", 25));
             satCount.setStroke(Color.WHITE);
-            satillite.add(satCount, 0, 1);
         }
     }
 
     public void buyBlack (GridPane blackHole, Text blackCount) {
         if (coins >= 1000) {
-            blackHole.getChildren().remove(blackCount);
             blackNum++;
             coins -= 1000;
-            blackCount = new Text("     x" + blackNum);
+            blackCount.setText("     x" + blackNum);
             blackCount.setFont(Font.font("Helvetica", 25));
             blackCount.setStroke(Color.WHITE);
-            blackHole.add(blackCount, 0, 1);
         }
     }
 
     public void buyRed (GridPane redStar, Text redCount) {
         if (coins >= 500) {
-            redStar.getChildren().remove(redCount);
             redNum++;
             coins -= 500;
-            redCount = new Text("     x" + redNum);
+            redCount.setText("     x" + redNum);
             redCount.setFont(Font.font("Helvetica", 25));
             redCount.setStroke(Color.WHITE);
-            redStar.add(redCount, 0, 1);
         }
     }
 
     public void buyShoot (GridPane shootingStar, Text shootCount) {
         if (coins >= 50) {
-            shootingStar.getChildren().remove(shootCount);
             shootingNum++;
             coins -= 50;
-            shootCount = new Text("     x" + shootingNum);
+            shootCount.setText("     x" + shootingNum);
             shootCount.setFont(Font.font("Helvetica", 25));
             shootCount.setStroke(Color.WHITE);
-            shootingStar.add(shootCount, 0, 1);
         }
     }
 }
